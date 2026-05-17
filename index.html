@@ -21,7 +21,7 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  padding: 15px;
+  padding: 10px;
 }
 
 #hearts {
@@ -43,13 +43,16 @@ body {
   to { transform: translateY(-100px) rotate(360deg); opacity: 0; }
 }
 
-/* Contenedor del Libro - Estricta página única tanto en PC como en móvil */
+/* Contenedor del Libro - Se aumentó la altura para dar más espacio */
 .book-container {
   position: relative;
   width: 100%;
-  max-width: 450px; 
-  height: min(650px, 85vh);
+  max-width: 460px; 
+  height: 650px;
+  max-height: 90vh;
   z-index: 10;
+  display: flex;
+  align-items: center;
 }
 
 .book {
@@ -63,7 +66,7 @@ body {
   position: absolute;
   inset: 0;
   background: #fffaf4;
-  padding: 10px 25px;
+  padding: 25px 22px 20px 22px;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 24px;
   display: none; 
@@ -93,12 +96,25 @@ body {
   text-align: center;
 }
 
+/* Caja de contenido con scroll interno si el texto es muy largo */
 .page-content {
   flex-grow: 1;
   width: 100%;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+}
+
+/* Estilo sutil para la barra de scroll interno (solo si llega a aparecer) */
+.page-content::-webkit-scrollbar {
+  width: 4px;
+}
+.page-content::-webkit-scrollbar-thumb {
+  background: rgba(214, 51, 108, 0.2);
+  border-radius: 4px;
 }
 
 h1, h2 {
@@ -107,46 +123,42 @@ h1, h2 {
 }
 
 h1 { 
-  font-size: clamp(2.2rem, 6vw, 3.2rem); 
+  font-size: clamp(2rem, 6vw, 2.8rem); 
   margin-bottom: 15px;
 }
 
 h2 {
   color: #c2185b;
-  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-size: clamp(1.3rem, 5vw, 1.6rem);
   margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
 p {
   line-height: 1.45;
   color: #444;
-  margin-bottom: 8px;
-  font-size: clamp(0.82rem, 2vw, 0.94rem);
+  margin-bottom: 10px;
+  font-size: clamp(0.84rem, 2.2vw, 0.94rem);
 }
 
 .page.cover p {
   color: white;
 }
 
-img {
-  width: 110px;
-  max-width: 100%;
-  display: block;
-  margin: 6px auto;
-  border-radius: 8px;
-}
-
-/* Fila de navegación inferior */
+/* Fila de navegación inferior fija abajo */
 .btn-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+  flex-shrink: 0;
 }
 
 .btn-row.only-next {
   justify-content: flex-end;
+  border-top: none;
 }
 
 .next-btn, .prev-btn {
@@ -182,14 +194,15 @@ img {
 
 @media(max-width: 480px) {
   .book-container {
-    height: 82vh;
+    height: 580px;
+    max-height: 88vh;
   }
   .page {
-    padding: 20px 18px;
+    padding: 20px 18px 15px 18px;
   }
   p {
     line-height: 1.4;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 }
 </style>
@@ -215,7 +228,7 @@ img {
     <div class="page">
       <div class="page-content">
         <h2>Cuando te conocí ❤️</h2>
-        Cuando llegaste a mi vida yo estaba muy destruido, pero cuando te vi, te quería solo para mí. Me comenzaste a gustar desde que prendiste la cámara ese día que nos presentaron y les dije que mañana los veo; la verdad me flechaste con tu carita y tu voz.</p>
+        <p>Cuando llegaste a mi vida yo estaba muy destruido, pero cuando te vi, te quería solo para mí. Me comenzaste a gustar desde que prendiste la cámara ese día que nos presentaron y les dije que mañana los veo; la verdad me flechaste con tu carita y tu voz.</p>
         <p>Te confieso que yo siempre les decía a todos "vamos a almorzar", pero la verdad es que solo quería una excusa para estar mas tiempo al lado tuyo, en la oficina me hacia a tu lado para explicarte pero me quedaba ahi por que me gusta mucho tu compañia. Me acuerdo tanto cuando me mostraste el juego Balatro y nos poníamos a jugar juntos, o cuando te mostré mis bandas de rock favoritas y las escuchábamos, uff... la verdad es que cada recuerdo contigo es único.</p>
         <p>Cuando estabas muy cerca de mí yo me ponía súper nervioso, pero a nivel dios; si no estoy mal, un día explicándote cosas de trabajo me puse completamente rojo.</p>
         <p>Y mira, toda, me tienes muy enamorado de ti como el primer día. 💛</p>
@@ -230,7 +243,7 @@ img {
     <div class="page">
       <div class="page-content">
         <h2>Recuerdos MASS ☕</h2>
-        <p>En MASS, la verdad yo siempre te miraba, no sé si te diste cuenta al comienzo, pero ya me habías robado todo el corazón.</p>
+        <p>Me acuerdo tanto cuando te hiciste esos mechones monitos y yo te comencé a decir "antenitas" y tú a mí "rulitos", ahí comenzó todo lo nuestro en MASS. La verdad yo siempre te miraba, no sé si te diste cuenta al comienzo, pero ya me habías robado todo el corazón.</p>
         <p>Cuando siempre íbamos a tomar agua y nos dábamos besos a escondidas, ufff... estar contigo me encantaba demasiado. También cuando te molestaba con tus piernas, amor, o cuando nos dábamos la mano debajo de la mesa en secreto. Amor, en serio me hiciste un amarre muy fuerte porque hasta el día de hoy me siento tan enamorado de ti. 💛</p>
         <p>Cuando te conté muchas cosas de mí y salimos, ¿te acuerdas? Afuera me abrí más contigo y escuchaste todo lo que te dije. También me contaste tus cosas y me comenzó a gustar mucho tu pensamiento y todo de ti.</p>
         <p>Recuerdo cuando tenía que ir a Atlantis y me despedí de ti con un beso en la mejilla, me fui muy feliz y me puse rojo. Yo te molestaba mucho por el chat de Teams y te enviaba cosas. Eres mi consentida de MASS.</p>
